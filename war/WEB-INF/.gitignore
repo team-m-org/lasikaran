@@ -1,2 +1,15 @@
 /classes
 /lib
+/childdetailsendpoint-v1.api
+/childvacmappingendpoint-v1.api
+/docdetailsendpoint-v1-rest.discovery
+/docdetailsendpoint-v1-rpc.discovery
+/docdetailsendpoint-v1.api
+/userendpoint-v1-rest.discovery
+/userendpoint-v1-rpc.discovery
+/userendpoint-v1.api
+/vaccinedetailsendpoint-v1.api
+/vacdetailsendpoint-v1-rest.discovery
+/vacdetailsendpoint-v1-rpc.discovery
+/vacmappingendpoint-v1-rest.discovery
+/vacmappingendpoint-v1-rpc.discovery
