@@ -22,6 +22,7 @@ define(function(require){
 					self.panel.exchangeDataFromServer('get','http://localhost:8081/book/','test?12',true,function (){});
 				}
 				
+				
 				$.ajax({
 					url : '/_ah/api/userendpoint/v1/user',
 					method : 'POST',
