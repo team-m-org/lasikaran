@@ -100,9 +100,9 @@ public class DocDetailsEndpoint {
 	public DocDetails insertDocDetails(DocDetails docdetails) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (containsDocDetails(docdetails)) {
+			/*if (containsDocDetails(docdetails)) {
 				throw new EntityExistsException("Object already exists");
-			}
+			}*/
 			mgr.makePersistent(docdetails);
 		} finally {
 			mgr.close();

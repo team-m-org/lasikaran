@@ -100,9 +100,9 @@ public class ChildVacMappingEndpoint {
 	public ChildVacMapping insertChildVacMapping(ChildVacMapping childvacmapping) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (containsChildVacMapping(childvacmapping)) {
+			/*if (containsChildVacMapping(childvacmapping)) {
 				throw new EntityExistsException("Object already exists");
-			}
+			}*/
 			mgr.makePersistent(childvacmapping);
 		} finally {
 			mgr.close();

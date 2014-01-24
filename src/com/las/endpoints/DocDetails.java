@@ -1,11 +1,17 @@
 package com.las.endpoints;
+import javax.jdo.annotations.Extension;
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class DocDetails {
 	@PrimaryKey
-	private long docId;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	private String docId;
+
 	private String docName;
 	private String username;
 	private String password;
@@ -70,10 +76,10 @@ public class DocDetails {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public long getDocId() {
+	public String getDocId() {
 		return docId;
 	}
-	public void setDocId(long docId) {
+	public void setDocId(String docId) {
 		this.docId = docId;
 	}
 	

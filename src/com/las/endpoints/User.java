@@ -2,13 +2,21 @@ package com.las.endpoints;
 
 import java.util.List;
 
+import javax.jdo.annotations.Extension;
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class User {
+	
+	
 	@PrimaryKey
-	private long userid;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	private String userid;
+	
 	private String mobile;
 	private String firstName;
 	private String lastName;
@@ -87,10 +95,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public long getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(long userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 }

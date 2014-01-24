@@ -1,12 +1,20 @@
 package com.las.endpoints;
 
+import javax.jdo.annotations.Extension;
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+
+import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class ChildDetails {
 	@PrimaryKey
-	private long childId;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	private String childId;
+	
 	private String childName;
 	private String birthDate;
 	private String parentId; //user id or mobile number from user table 
@@ -36,10 +44,10 @@ public class ChildDetails {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public long getChildId() {
+	public String getChildId() {
 		return childId;
 	}
-	public void setChildId(long childId) {
+	public void setChildId(String childId) {
 		this.childId = childId;
 	}
 	

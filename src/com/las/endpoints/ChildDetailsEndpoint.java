@@ -100,9 +100,9 @@ public class ChildDetailsEndpoint {
 	public ChildDetails insertChildDetails(ChildDetails childdetails) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (containsChildDetails(childdetails)) {
+			/*if (containsChildDetails(childdetails)) {
 				throw new EntityExistsException("Object already exists");
-			}
+			}*/
 			mgr.makePersistent(childdetails);
 		} finally {
 			mgr.close();

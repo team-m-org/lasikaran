@@ -100,9 +100,9 @@ public class VaccineDetailsEndpoint {
 	public VaccineDetails insertVaccineDetails(VaccineDetails vaccinedetails) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (containsVaccineDetails(vaccinedetails)) {
+			/*if (containsVaccineDetails(vaccinedetails)) {
 				throw new EntityExistsException("Object already exists");
-			}
+			}*/
 			mgr.makePersistent(vaccinedetails);
 		} finally {
 			mgr.close();
