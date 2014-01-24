@@ -2,13 +2,19 @@ package com.las.endpoints;
 
 import java.util.Date;
 
+import javax.jdo.annotations.Extension;
+import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class ChildVacMapping {
 	@PrimaryKey
-	private long mapId;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
+	private String mapId;
+	
 	private String childId;
 	private String vaccinationId;
 	private Date startDate;
@@ -38,10 +44,10 @@ public class ChildVacMapping {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public long getMapId() {
+	public String getMapId() {
 		return mapId;
 	}
-	public void setMapId(long mapId) {
+	public void setMapId(String mapId) {
 		this.mapId = mapId;
 	}
 	
