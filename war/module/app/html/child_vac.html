@@ -1,19 +1,25 @@
 <div class="child-details well well-sm col-sm-6 col-sm-push-3">
 	<form class="form-horizontal" role="form" method="post" action="" name="c_frm" id="c_frm">
 		<div class="form-group ">
-			<label for="c_name" class="col-sm-3 control-label">Mobile</label>
+			<label for="c_name" class="col-sm-4 control-label">Mobile Number is</label>
 			<div class="col-sm-8">
 				<input type="tel" class="form-control" id="m_name"  name="m_name" placeholder="Enter Mobile Number" required autocomplete="off">
 			</div>
 		</div>
 		<div class="form-group ">
-			<label for="c_name" class="col-sm-3 control-label">Name</label>
+			<label for="c_name" class="col-sm-4 control-label">Vaccination for</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" id="c_name"  name="c_name" placeholder="Enter Name" required autocomplete="off">
+				<input type="radio" name="genderRadios" id="genderRadios" value="M" checked >My Son / <input type="radio" name="genderRadios" id="genderRadios" value="F" checked >My Daughter 
+			</div>
+		</div>
+		<div class="form-group ">
+			<label for="c_name" class="col-sm-4 control-label">His/Her Name is</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" id="c_name"  name="c_name" placeholder="Enter Childern Name" required autocomplete="off">
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="b_date" class="col-sm-3 control-label">Birth Date</label>
+			<label for="b_date" class="col-sm-4 control-label">Having Birth Date</label>
 			<div class="col-sm-8">
 				<input type="date" class="form-control" id="b_date" name="b_date" placeholder="Birth Date" required autocomplete="off">
 			</div>

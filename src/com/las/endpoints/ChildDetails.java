@@ -7,6 +7,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 @PersistenceCapable
 public class ChildDetails {
@@ -19,6 +20,8 @@ public class ChildDetails {
 	private String birthDate;
 	private String parentId; //user id or mobile number from user table 
 	private String gender;
+	
+	private User parent;
 	
 	public String getChildName() {
 		return childName;
@@ -49,6 +52,12 @@ public class ChildDetails {
 	}
 	public void setChildId(String childId) {
 		this.childId = childId;
+	}
+	public User getParent() {
+		return parent;
+	}
+	public void setParent(User parent) {
+		this.parent = parent;
 	}
 	
 }

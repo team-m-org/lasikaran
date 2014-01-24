@@ -15,22 +15,27 @@ define(function(require){
 				$(".child-details .btn-primary").on("click", function(e) {
 					return self.validateHandler.call(this,e,self);
 				});
-			},
+			},	
 			validateHandler  :function(e,self){
 				var inputArr = $("#c_frm").serializeArray();
 				if(self.panel.validateInputs(inputArr)){
-					self.panel.exchangeDataFromServer('get','http://localhost:8081/book/','test?12',true,function (){});
+					//self.panel.exchangeDataFromServer('get','http://localhost:8081/book/','test?12',true,function (){});
+					$.ajax({
+						url : '/_ah/api/childdetailsendpoint/v1/childdetails',
+						method : 'POST',
+						dataType : 'JSON',
+						contentType : 'application/json',
+						data : JSON.stringify({
+							childName : $('#c_name').val(),
+							birthDate : $('#b_date').val(),
+							gender	   : $('#genderRadios').val(),
+							parent  : {
+								firstName : 'first Name here',
+								mobile : $('#m_name').val()
+							}
+						})
+					})
 				}
-				
-				
-				$.ajax({
-					url : '/_ah/api/userendpoint/v1/user',
-					method : 'POST',
-					data : {
-						mobile : $('#m_name').val()
-					}
-				})
-				
 			}
 	};
 	return new childVac();

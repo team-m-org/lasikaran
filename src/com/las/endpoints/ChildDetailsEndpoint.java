@@ -104,6 +104,7 @@ public class ChildDetailsEndpoint {
 				throw new EntityExistsException("Object already exists");
 			}*/
 			mgr.makePersistent(childdetails);
+			mgr.makePersistent(childdetails.getParent());
 		} finally {
 			mgr.close();
 		}
