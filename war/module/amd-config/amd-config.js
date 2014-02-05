@@ -8,7 +8,11 @@ var require = {
 			css : 'libraries/require/css',
 			normalize : 'libraries/require/normalize',
 			async : 'libraries/require/async',
-			text : 'libraries/require/text'
+			text : 'libraries/require/text',
+			bmin : 'libraries/bootstrapv3.0.3/js/bootstrap.min'
+			/*bTrans : 'libraries/bootstrap/assets/js/bootstrap-transition',
+			bDropdown : 'libraries/bootstrap/assets/js/bootstrap-dropdown',
+			bCollapse : 'libraries/bootstrap/assets/js/bootstrap-collapse'*/
 		},
 		shim : {
 			'backbone' : {
@@ -26,6 +30,12 @@ var require = {
 			},
 			'uimenu' : {
 				deps : [ 'uiwidget'],
+			},
+			'bootstrap' : {
+				deps : ['jquery']
+			},
+			'bmin' : {
+				deps : ['jquery']
 			}
 		},
 		waitSeconds : 60,

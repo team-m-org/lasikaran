@@ -21,6 +21,9 @@ public class ChildDetails {
 	private String parentId; //user id or mobile number from user table 
 	private String gender;
 	
+	
+	
+	@Unowned
 	private User parent;
 	
 	public String getChildName() {

@@ -1,4 +1,4 @@
 define(function(require){
-	var	 dashBoard	= require("./dashboard");
-		dashBoard.init();
+	var	 menuObj	= require("./menu");
+	menuObj.init();
 });

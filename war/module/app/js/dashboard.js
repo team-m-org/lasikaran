@@ -1,6 +1,5 @@
 define(function(require){
 	var Handlebars 	= require('handlebars');
-	var $ 			= require('jquery');
 	var tmpl_src 	= require("text!../html/dashboard.html");
 	var childVac 	= require('./child_vac');
 	var healthCheck = require('./health');
@@ -29,7 +28,7 @@ define(function(require){
 			},
 			render : function (){
 				var self = this;
-				$(".dash-container").html(Handlebars.compile(tmpl_src)(this.templateMap));
+				$(".util-container").html(Handlebars.compile(tmpl_src)(this.templateMap));
 				this.registeEvents();
 			},
 			renderBookShelf : function (){
@@ -37,7 +36,7 @@ define(function(require){
 			},
 			registeEvents: function (){
 				var self = this;
-				$(".dash-container .notification").on("change", function(e) {
+				$(".util-container .notification").on("change", function(e) {
 					return self.notificationHandler.call(this,e,self);
 				});
 			},
@@ -58,8 +57,6 @@ define(function(require){
 				return true;
 			},
 			exchangeDataFromServer: function(method, url, param, syncParam, callBack) {
-				alert("saved");
-				return;
 	            var self = this;
 	            $.ajax({
 	                beforeSend: function() {
@@ -70,8 +67,11 @@ define(function(require){
 	                dataType: "json",
 	                url: url,
 	                data: param,
-	                success: callBack,
+	                success: function (data){
+	                	alert("data========",data);
+	                },
 	                error: function(e, f) {
+	                	alert("e========",e);
 	                    self.hideLoader();
 	                }
 	            });

@@ -1,6 +1,14 @@
 package com.las.endpoints;
 
-import com.las.endpoints.PMF;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Nullable;
+import javax.inject.Named;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+import javax.persistence.EntityNotFoundException;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -8,16 +16,6 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
-
-import java.util.HashMap;
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.inject.Named;
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 @Api(name = "childdetailsendpoint", namespace = @ApiNamespace(ownerDomain = "las.com", ownerName = "las.com", packagePath = "endpoints"))
 public class ChildDetailsEndpoint {
@@ -103,9 +101,30 @@ public class ChildDetailsEndpoint {
 			/*if (containsChildDetails(childdetails)) {
 				throw new EntityExistsException("Object already exists");
 			}*/
+			User parent = childdetails.getParent();
+			
+			childdetails.setParent(null);
+			
 			mgr.makePersistent(childdetails);
-			mgr.makePersistent(childdetails.getParent());
-		} finally {
+			
+			Query q = mgr.newQuery(User.class);
+			q.setFilter("mobile == mobileParam");
+			q.declareParameters("String mobileParam");
+
+			List<User> alUsers = (List<User>) q.execute(parent.getMobile());
+			
+			if(alUsers.isEmpty()){
+				mgr.makePersistent(parent);
+			} else {
+				parent = alUsers.get(0);
+			}
+			childdetails.setParentId(parent.getUserid());
+			mgr.makePersistent(childdetails);
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		finally {
 			mgr.close();
 		}
 		return childdetails;

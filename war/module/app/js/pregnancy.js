@@ -8,7 +8,7 @@ define(function(require){
 				this.registerEvents();
 			},
 			render : function (){
-				$(".util-container").html(Handlebars.compile(tmpl_prg));
+				$(".sub-dash-container").html(Handlebars.compile(tmpl_prg));
 			},
 			registerEvents : function (){
 				var self = this;
