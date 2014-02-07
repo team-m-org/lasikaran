@@ -4,21 +4,33 @@ define(function(require){
 	userDetails.prototype = {
 			init : function (){
 				this.render();
-				//this.registerEvents();
+				this.registerEvents();
 			},
 			render : function (){
 				$(".util-container").html(Handlebars.compile(tmpl_h));
 			},
 			registerEvents : function (){
 				var self = this;
-				$(".health_details .btn-primary").on("click", function(e) {
+				$(".js_user_details .btn-primary").on("click", function(e) {
 					return self.validateHandler.call(this,e,self);
 				});
 			},
 			validateHandler  :function(e,self){
-				var inputArr = $("#h_frm").serializeArray();
-				self.panel.validateInputs(inputArr);
+				var inputArr = $("#user_frm").serializeArray();
+				self.validateInputs(inputArr);
 				//self.panel.exchangeDataFromServer('get',url,param,true,function (){});
+			},
+			validateInputs : function(inputArr){
+				for(var i=0;i<inputArr.length;i++){
+					if(!$("#"+inputArr[i].name)[0].checkValidity()){
+						$("#"+inputArr[i].name).parent().removeClass('has-error').addClass('has-error');
+						$("#"+inputArr[i].name).focus();
+						return false;
+					}else{
+						$("#"+inputArr[i].name).parent().removeClass('has-error');
+					}
+				}
+				return true;
 			}
 	};
 	return new userDetails();
