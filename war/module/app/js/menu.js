@@ -17,12 +17,12 @@ define(function(require){
 			},
 			registerEvents : function (){
 				var self = this;
-				$(".menu-container .js-navbar ul > li").on("click", function(e) {
+				$(".menu-container .js-navbar li").on("click", function(e) {
 					return self.renderComponent.call(this,e,self);
 				});
 			},
 			renderComponent :function (e,self){
-				$(".menu-container .js-navbar ul > li").removeClass('active');
+				$(".menu-container .js-navbar li").removeClass('active');
 				var renderComp  = $(this).text().toLowerCase();
 				if(renderComp==="doctor"){
 					doctor.init();
