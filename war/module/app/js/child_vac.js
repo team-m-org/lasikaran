@@ -33,7 +33,10 @@ define(function(require){
 								firstName : 'first Name here',
 								mobile : $('#m_name').val()
 							}
-						})
+						}),
+						success : function (){
+							$("#c_frm")[0].reset();
+						}
 					})
 				}
 			}
