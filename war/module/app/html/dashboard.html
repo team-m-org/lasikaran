@@ -1,15 +1,22 @@
-<div class="well well-sm">
-	<form class="form-horizontal" role="form">
-		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-4 control-label">Notification Type</label>
-			<div class="col-sm-5">
-				<select class="form-control notification" name="notificaton_type" id="notificaton_type">
-					{{#each this}}
-					<option value="{{this.tmpid}}">{{this.title}}</option>
-					{{/each}}
-				</select>
-			</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Dashboard</h3>
+	</div>
+	<div class="panel-body">
+		<div class="well well-sm">
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-4 control-label">Notification
+						Type</label>
+					<div class="col-sm-5">
+						<select class="form-control notification" name="notificaton_type"
+							id="notificaton_type"> {{#each this}}
+							<option value="{{this.tmpid}}">{{this.title}}</option> {{/each}}
+						</select>
+					</div>
+				</div>
+			</form>
 		</div>
-	</form>
+		<div class="sub-dash-container"></div>
+	</div>
 </div>
-<div class="sub-dash-container"></div>
