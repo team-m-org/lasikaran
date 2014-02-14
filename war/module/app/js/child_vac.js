@@ -19,25 +19,27 @@ define(function(require){
 			validateHandler  :function(e,self){
 				var inputArr = $("#c_frm").serializeArray();
 				if(self.panel.validateInputs(inputArr)){
-					//self.panel.exchangeDataFromServer('get','http://localhost:8081/book/','test?12',true,function (){});
-					$.ajax({
-						url : '/_ah/api/childdetailsendpoint/v1/childdetails',
-						method : 'POST',
-						dataType : 'JSON',
-						contentType : 'application/json',
-						data : JSON.stringify({
-							childName : $('#c_name').val(),
-							birthDate : $('#b_date').val(),
-							gender	   : $('#genderRadios').val(),
-							parent  : {
-								firstName : 'first Name here',
-								mobile : $('#m_name').val()
-							}
-						}),
-						success : function (){
-							$("#c_frm")[0].reset();
-						}
-					})
+					var url = "http://localhost/vac/json/child.php?mode=save" 
+						$.ajax({
+							   	type: 'GET',
+							   	crossDomain: true,
+							    url: url,
+							    data : inputArr,
+							    async: false,
+							    jsonpCallback: 'jsonCallback',
+							    contentType: "application/json",
+							    dataType: 'jsonp',
+							    success: function(json) {
+							       if(json.status==1){
+							    	  
+							       }else{
+							    	   $(".error").html("Invalid Credentials !");
+							       }
+							    },
+							    error: function(jqXHR, textStatus, errorThrown) {
+							    	  console.log(textStatus, errorThrown);
+							   	}
+						})
 				}
 			}
 	};
