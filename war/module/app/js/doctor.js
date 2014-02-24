@@ -17,8 +17,29 @@ define(function(require){
 			},
 			validateHandler  :function(e,self){
 				var inputArr = $("#doc_frm").serializeArray();
-				self.validateInputs(inputArr);
-				//self.panel.exchangeDataFromServer('get',url,param,true,function (){});
+				if(self.validateInputs(inputArr)){
+						var url = "http://localhost/vac/json/doctor.php?mode=save" 
+						$.ajax({
+							   	type: 'GET',
+							   	crossDomain: true,
+							    url: url,
+							    data : inputArr,
+							    async: false,
+							    jsonpCallback: 'jsonCallback',
+							    contentType: "application/json",
+							    dataType: 'jsonp',
+							    success: function(json) {
+							       if(json.status==1){
+							    	  
+							       }else{
+							    	   $(".error").html("Invalid Credentials !");
+							       }
+							    },
+							    error: function(jqXHR, textStatus, errorThrown) {
+							    	  console.log(textStatus, errorThrown);
+							   	}
+						})
+				}
 			},
 			validateInputs : function(inputArr){
 				for(var i=0;i<inputArr.length;i++){

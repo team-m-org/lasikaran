@@ -1,4 +1,4 @@
 define(function(require){
-	var	 menuObj	= require("./login");
+	var	 menuObj	= require("./menu");
 	menuObj.init();
 });
