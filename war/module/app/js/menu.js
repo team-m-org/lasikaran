@@ -1,22 +1,38 @@
 define(function(require){
-	var $ 			= require('jquery');
-	var bmin 		= require('bmin');
+	/*var $ 			= require('jquery');
+	var bmin 		= require('bmin');*/
 	var	dashBoard	= require("./dashboard");
 	var	doctor		= require("./doctor");
 	var	user		= require("./user");
 	var tmpl_h 		= require("text!../html/menu.html");
 	var menuObj = function() {};
 	menuObj.prototype = {
-			init : function (){
-				dashBoard.init();
+			userInfo : {},
+			init : function (userDetails){
+				var self = this;
+				self.userInfo = $.extend(self.userInfo,userDetails); 
+				//console.log("self.userInfo============",self.userInfo);
 				this.render();
 				this.registerEvents();
 			},
 			render : function (){
-				$(".menu-container").html(Handlebars.compile(tmpl_h));
+				var self = this;
+				//console.log("this.userInfo===========",self.userInfo);
+				$(".menu-container").html(Handlebars.compile(tmpl_h)(self.userInfo));
 			},
 			registerEvents : function (){
 				var self = this;
+				var classtoShow;
+				if(self.userInfo.gId==1){
+					dashBoard.init();
+					classtoShow = "doctor_"+self.userInfo.gId;
+				}else{
+					user.init();	
+					classtoShow = "user_"+self.userInfo.gId;
+				}
+				//console.log("classtoShow========",classtoShow);
+				$(".menu-container .js-navbar .userlink").addClass('hide');
+				$(".menu-container .js-navbar .userlink."+classtoShow).removeClass('hide');
 				$(".menu-container .js-navbar li").on("click", function(e) {
 					return self.renderComponent.call(this,e,self);
 				});

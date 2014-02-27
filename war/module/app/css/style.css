@@ -103,3 +103,6 @@
 	border-radius: 4px 4px 0 0;
 	padding-bottom: 1%;
 }
+.pad10 {
+			padding:10px !important;
+}

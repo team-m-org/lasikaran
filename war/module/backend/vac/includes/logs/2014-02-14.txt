@@ -1,0 +1,71 @@
+Time : 13:58:53
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:48
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:42
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:42
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:42
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:40
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:28
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:58:25
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:51:33
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:47:06
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:46:48
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2014-02-12' for key 'birth_date'
+Raw SQL : INSERT INTO child_details(child_name,birth_date,parent_id,gender) VALUES(:child_name,:birth_date,:parent_id,:gender)
+
+Time : 13:25:03
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2147483647' for key 'mobile_2'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:group_id)
+
+Time : 13:24:35
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '2147483647' for key 'mobile_2'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:group_id)
+
+Time : 12:59:33
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'text_msg' in 'field list'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,text_msg,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:group_id)
+
+Time : 12:59:29
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'text_msg' in 'field list'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,text_msg,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:group_id)
+
+Time : 12:59:26
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'text_msg' in 'field list'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,text_msg,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:group_id)
+
+Time : 12:59:13
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'text_msg' in 'field list'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,text_msg,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:group_id)
+
+Time : 12:49:31
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'text_msg' in 'field list'
+Raw SQL : INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,text_msg,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:group_id)

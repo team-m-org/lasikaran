@@ -1,17 +1,23 @@
 define(function(require){
-	var $ 			= require('jquery');
-	var Handlebars	= require('handlebars');
-	var bmin 		= require('bmin');
 	var	menuObj	= require("./menu");
 	var tmpl_h 	= require("text!../html/login.html");
+	var tmpl_r 	= require("text!../html/register.html");
 	var logObj = function() {};
 	logObj.prototype = {
-			init : function (){
+			userInfo : {},
+			pagetoLoad : "",
+			init : function (page){
+				this.pagetoLoad = page;
 				this.render();
 				this.registerEvents();
 			},
 			render : function (){
-				$(".util-container").html(Handlebars.compile(tmpl_h));
+				if(this.pagetoLoad=="login"){
+					$(".util-container").html(Handlebars.compile(tmpl_h));
+				}else{
+					$(".util-container").html(Handlebars.compile(tmpl_r));
+				}
+				
 			},
 			registerEvents : function (){
 				var self = this;
@@ -20,9 +26,15 @@ define(function(require){
 				});
 			},
 			validateHandler  :function(e,self){
-				var inputArr = $("#log_frm").serializeArray();
+				var url,inputArr;
+				if(self.pagetoLoad=="login"){
+					inputArr = $("#log_frm").serializeArray();
+					url = "http://localhost/vac/json/authUser.php?mode=log&"+Math.random();
+				}else{
+					inputArr = $("#reg_frm").serializeArray();
+					url = "http://localhost/vac/json/authUser.php?mode=reg"+Math.random();
+				}	
 				if(self.validateInputs(inputArr)){
-					var url = "http://localhost/vac/json/authUser.php?mode=1" 
 					$.ajax({
 						   	type: 'GET',
 						   	crossDomain: true,
@@ -33,8 +45,11 @@ define(function(require){
 						    contentType: "application/json",
 						    dataType: 'jsonp',
 						    success: function(json) {
-						       if(json.status==1){
-						    	   menuObj.init();
+						       if(json.status!==""){
+						    	   self.userInfo.mobile = $("#mobile_num").val();
+						    	   self.userInfo.gId 	= json.status;
+						    	   //console.log("============",self.userInfo);
+						    	   menuObj.init(self.userInfo);
 						       }else{
 						    	   $(".error").html("Invalid Credentials !");
 						       }
