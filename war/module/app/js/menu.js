@@ -1,6 +1,4 @@
 define(function(require){
-	/*var $ 			= require('jquery');
-	var bmin 		= require('bmin');*/
 	var	dashBoard	= require("./dashboard");
 	var	doctor		= require("./doctor");
 	var	user		= require("./user");
@@ -8,16 +6,14 @@ define(function(require){
 	var menuObj = function() {};
 	menuObj.prototype = {
 			userInfo : {},
-			init : function (userDetails){
+			init : function (){
 				var self = this;
-				self.userInfo = $.extend(self.userInfo,userDetails); 
-				//console.log("self.userInfo============",self.userInfo);
+				self.userInfo = getStorage('mobile'); 
 				this.render();
 				this.registerEvents();
 			},
 			render : function (){
 				var self = this;
-				//console.log("this.userInfo===========",self.userInfo);
 				$(".menu-container").html(Handlebars.compile(tmpl_h)(self.userInfo));
 			},
 			registerEvents : function (){
@@ -30,9 +26,9 @@ define(function(require){
 					user.init();	
 					classtoShow = "user_"+self.userInfo.gId;
 				}
-				//console.log("classtoShow========",classtoShow);
 				$(".menu-container .js-navbar .userlink").addClass('hide');
 				$(".menu-container .js-navbar .userlink."+classtoShow).removeClass('hide');
+				
 				$(".menu-container .js-navbar li").on("click", function(e) {
 					return self.renderComponent.call(this,e,self);
 				});

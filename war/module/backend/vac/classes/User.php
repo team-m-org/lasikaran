@@ -1,4 +1,5 @@
 <?php
+require("../classes/UserLoginDetails.php");
 class User
 {
 	private $db;
@@ -21,19 +22,32 @@ class User
 		return $update;
 	}
 	public function insertUserDetails($input_arr){
+		$authObj 	= new UserLoginDetails($this->db);
+		$arrLogin 	=  array(
+			"u_mobile"=>$input_arr['m_name'],
+			"u_name"=>isset($input_arr['user_name']) ? 	$input_arr['user_name'] : "",
+			"u_password"=>$input_arr['m_name'],
+			"group_id" => "2"
+		);
+		
+		$authObj->insertUserLogInDetails($arrLogin);
+		$today = date("Y-m-d H:i:s");
 		$arr 	=  array(
-					"user_name"=>$input_arr['m_name'],
-					"mobile"=>$input_arr['m_name'],
-					"password"=>$input_arr['m_name'],
-					"email" => "test@test.com",
-					"address" =>"",
-					"pincode" =>"",
-					"location" =>"",
-					"phone" =>"02233",
-					"group_id" => "2"
-			);
-			$insert	 =  $this->db->query("INSERT INTO user_details(user_name,mobile,password,email,address,pincode,location,phone,group_id) VALUES(:user_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:group_id)",$arr); 
-			return $insert;
+				"salutation"=>"Mr.",
+				"first_name"=>"",
+				"last_name"=>"",
+				"mobile"=>$input_arr['m_name'],
+				"refer_by_doc"=>$input_arr['doc_id'],
+				"email" => "test@test.com",
+				"address" =>"",
+				"pincode" =>"",
+				"location" =>"",
+				"phone" =>"",
+				"registration_date" =>$today,
+				"group_id" => "2"
+		);
+		$insert	 =  $this->db->query("INSERT INTO user_details(salutation,first_name,last_name,mobile,refer_by_doc,email,address,pincode,location,phone,registration_date,group_id) VALUES(:salutation,:first_name,:last_name,:mobile,:refer_by_doc,:email,:address,:pincode,:location,:phone,:registration_date,:group_id)",$arr); 
+		return $insert;
 	}
 }
 ?>

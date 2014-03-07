@@ -1,3 +1,4 @@
+
 define(function(require){
 	var	menuObj	= require("./menu");
 	var tmpl_h 	= require("text!../html/login.html");
@@ -45,11 +46,12 @@ define(function(require){
 						    contentType: "application/json",
 						    dataType: 'jsonp',
 						    success: function(json) {
-						       if(json.status!==""){
+						       if(json.status!==0){
 						    	   self.userInfo.mobile = $("#mobile_num").val();
 						    	   self.userInfo.gId 	= json.status;
 						    	   //console.log("============",self.userInfo);
-						    	   menuObj.init(self.userInfo);
+						    	   setStorage('mobile',self.userInfo);
+						    	   menuObj.init();
 						       }else{
 						    	   $(".error").html("Invalid Credentials !");
 						       }
@@ -76,3 +78,13 @@ define(function(require){
 	};
 	return new logObj();
 });
+function setStorage(key,obj){
+	localStorage.setItem(key,JSON.stringify(obj));
+};
+function getStorage(key){
+	if(localStorage.getItem(key)!= "undefined"){
+		return JSON.parse(localStorage.getItem(key));
+	}else{
+		return [];
+	}
+};

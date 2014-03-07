@@ -1,18 +1,60 @@
 <?php
 require("../includes/Db.class.php");
 require("../classes/Doctor.php");
-$mode 			= $_REQUEST['mode'];
+$mode 			= isset($_REQUEST['mode']) ? $_REQUEST['mode'] : "";
 $inputArr		= $_REQUEST;
 switch($mode){
 	case "save" :
 			$arr = saveDoctorInfo($inputArr);
 			break;
+	case "update" :
+			$arr = updateDoctorInfo($inputArr);
+			break;
 	default: 
-			$arr = AuthUser($mobile,$password);
+			$arr = getDocDetails($inputArr);
 }
-header('Content-type: application/json');
+//header('Content-type: application/json');
 echo $_REQUEST['callback'] . '(' . json_encode($arr) . ');';
 exit;
+function updateDoctorInfo($inputArr){
+	try {
+			global $db;
+			//server side validation
+			foreach( $inputArr as $key => $key_value ){
+				$keyArr[$key] = $key_value;
+			}
+			$docObj 		= new Doctor($db);
+			$r_user 		= $docObj->updateDocDetails($keyArr);
+			$arr = array('status' =>$r_user);
+			return $arr;
+		}catch(Exception $e) {
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
+}
+function getDocDetails($inputArr){
+	try {
+			global $db;
+			//server side validation
+			foreach( $inputArr as $key => $key_value ){
+				$keyArr[$key] = $key_value;
+			}
+			//print_r($keyArr);
+			$docObj 		= new Doctor($db);
+			$r_user 		= $docObj->getDocDetails($keyArr['mobile']);
+			//print_r($r_user);
+			if(is_array($r_user) && sizeof($r_user)>0){
+				$arr = array(
+					'status' => "1",
+					'data' => $r_user,
+				);
+			}else {
+				$arr = array('status' => "0");
+			}
+			return $arr;
+		}catch(Exception $e) {
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
+}
 function saveDoctorInfo($inputArr){
 		try {
 			global $db;

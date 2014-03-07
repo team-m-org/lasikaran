@@ -2,23 +2,65 @@ define(function(require){
 	var tmpl_h = require("text!../html/doctor.html");
 	var doctorDetails = function() {};
 	doctorDetails.prototype = {
+			docInfo : {},
 			init : function (){
 				this.render();
-				this.registerEvents();
+				//this.registerEvents();
 			},
 			render : function (){
-				$(".util-container").html(Handlebars.compile(tmpl_h));
+				var self = this;
+				//self.getDocDetails();
+				$.when(self.getDocDetails()).then(self.renderDoc());
+			},
+			renderDoc : function (){
+				var self = this; 
+				$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
+		    	self.registerEvents();
 			},
 			registerEvents : function (){
 				var self = this;
 				$(".js_doc_details .btn-primary").on("click", function(e) {
+					alert("called");
 					return self.validateHandler.call(this,e,self);
 				});
+			},
+			getDocDetails : function(){
+				var self =this;
+				var url = "http://localhost/vac/json/doctor.php" 
+					$.ajax({
+						   	type: 'GET',
+						   	crossDomain: true,
+						    url: url,
+						    data : getStorage('mobile'),
+						    async: true,
+						    jsonpCallback: 'jsonCallback',
+						    contentType: "application/json",
+						    dataType: 'jsonp',
+						    success: function(json) {
+						       if(json.status==1){
+						    	  self.docInfo = json.data[0];
+						    	  //$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
+						    	  //self.registerEvents();
+						       }else{
+						    	   $(".error").html("Invalid Credentials !");
+						       }
+						    },
+						    error: function(jqXHR, textStatus, errorThrown) {
+						    	  console.log(textStatus, errorThrown);
+						   	}
+					})
 			},
 			validateHandler  :function(e,self){
 				var inputArr = $("#doc_frm").serializeArray();
 				if(self.validateInputs(inputArr)){
-						var url = "http://localhost/vac/json/doctor.php?mode=save" 
+						var doc_id = $("#doc_id").val();
+						var mode;
+						if(doc_id===""){
+							mode = "save";
+						}else{
+							mode = "update";
+						}
+						var url = "http://localhost/vac/json/doctor.php?mode="+mode; 
 						$.ajax({
 							   	type: 'GET',
 							   	crossDomain: true,

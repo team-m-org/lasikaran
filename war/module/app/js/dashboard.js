@@ -4,6 +4,7 @@ define(function(require){
 	var childVac 	= require('./child_vac');
 	var healthCheck = require('./health');
 	var preObj  	= require('./pregnancy');
+	var docObj  	= require('./doctor');
 	
 	var dashBoard = function() {};
 	dashBoard.prototype = {
@@ -30,9 +31,6 @@ define(function(require){
 				var self = this;
 				$(".util-container").html(Handlebars.compile(tmpl_src)(this.templateMap));
 				this.registeEvents();
-			},
-			renderBookShelf : function (){
-				$(".shelf-container").html(Handlebars.compile(tmpl_src)(this.bookShelfArr));
 			},
 			registeEvents: function (){
 				var self = this;

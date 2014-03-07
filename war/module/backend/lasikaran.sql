@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2014 at 12:11 PM
+-- Generation Time: Mar 07, 2014 at 02:49 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -34,14 +34,16 @@ CREATE TABLE IF NOT EXISTS `child_details` (
   `gender` enum('male','female') NOT NULL,
   PRIMARY KEY (`child_id`),
   UNIQUE KEY `birth_date` (`birth_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `child_details`
 --
 
 INSERT INTO `child_details` (`child_id`, `child_name`, `birth_date`, `parent_id`, `gender`) VALUES
-(1, 'anvee', '2014-02-12', 1, 'female');
+(1, 'anvee', '2014-03-04', 1, 'female'),
+(4, '123', '2014-03-03', 1, 'female'),
+(5, 'arnav', '2014-03-05', 2, 'male');
 
 -- --------------------------------------------------------
 
@@ -51,7 +53,8 @@ INSERT INTO `child_details` (`child_id`, `child_name`, `birth_date`, `parent_id`
 
 CREATE TABLE IF NOT EXISTS `doc_details` (
   `doc_id` int(11) NOT NULL AUTO_INCREMENT,
-  `doc_name` varchar(100) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
   `mobile` bigint(20) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -66,17 +69,15 @@ CREATE TABLE IF NOT EXISTS `doc_details` (
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`doc_id`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `doc_details`
 --
 
-INSERT INTO `doc_details` (`doc_id`, `doc_name`, `mobile`, `password`, `email`, `address`, `pincode`, `location`, `phone`, `text_msg`, `per_patient_amt`, `registration_date`, `status`, `group_id`) VALUES
-(3, 'mahesh', 9324202563, '123', 'test@test.com', 'eqe qw  q', 123123, 'Mumbai', 123123231, '2312 13 123dasda 1ad a', 0, '0000-00-00 00:00:00', 'active', 1),
-(17, '', 9819323574, '123', '', '', 0, '', 0, '', 50, '2014-02-27 11:51:08', 'active', 1),
-(18, '', 9219323574, '123', '', '', 0, '', 0, '', 50, '2014-02-27 11:51:34', 'active', 1),
-(19, '', 7777777777, '123', '', '', 0, '', 0, '', 50, '2014-02-27 12:03:14', 'active', 1);
+INSERT INTO `doc_details` (`doc_id`, `first_name`, `last_name`, `mobile`, `password`, `email`, `address`, `pincode`, `location`, `phone`, `text_msg`, `per_patient_amt`, `registration_date`, `status`, `group_id`) VALUES
+(1, 'mahesh', 'sikwal', 9324202563, '123', 'mahesh.sikwal@gmail.com', '', 0, '', 0, 'Hi test is gomin on "with "?', 50, '2014-03-05 09:55:04', 'active', 1),
+(2, 'mahesh', 'sikwal', 1111111111, '123', 'qweqe@gmail.com', '', 0, '', 0, 'dad ', 50, '2014-03-06 11:24:52', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `mobile` bigint(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `refer_by_doc` int(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `address` text NOT NULL,
   `pincode` int(11) NOT NULL,
@@ -170,14 +171,16 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `status` enum('active','deactive','','') NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `mobile` (`mobile`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_details`
 --
 
-INSERT INTO `user_details` (`user_id`, `salutation`, `first_name`, `last_name`, `mobile`, `password`, `email`, `address`, `pincode`, `location`, `phone`, `registration_date`, `group_id`, `status`) VALUES
-(1, '', '', '', 9324202563, '9324202563', 'test@test.com', '', 0, '', 2233, '0000-00-00 00:00:00', 2, 'active');
+INSERT INTO `user_details` (`user_id`, `salutation`, `first_name`, `last_name`, `mobile`, `refer_by_doc`, `email`, `address`, `pincode`, `location`, `phone`, `registration_date`, `group_id`, `status`) VALUES
+(1, 'Mr.', '', '', 7777777777, 1, 'test@test.com', '', 0, '', 0, '0000-00-00 00:00:00', 2, 'active'),
+(2, 'Mr.', '', '', 2222222222, 0, 'test@test.com', '', 0, '', 0, '2014-03-06 11:25:14', 2, 'active'),
+(3, 'Mr.', '', '', 1111111111, 0, 'test@test.com', '', 0, '', 0, '2014-03-06 11:48:15', 2, 'active');
 
 -- --------------------------------------------------------
 
@@ -197,9 +200,11 @@ CREATE TABLE IF NOT EXISTS `user_login_details` (
 --
 
 INSERT INTO `user_login_details` (`user_mobile`, `user_name`, `password`, `group_id`) VALUES
-(9819323574, '', '123', 2),
-(9219323574, '', '123', 1),
-(7777777777, '', '123', 1);
+(9324202563, '', '123', 1),
+(7777777777, '', '7777777777', 2),
+(1111111111, '', '123', 1),
+(2222222222, '', '2222222222', 2),
+(1111111111, '', '1111111111', 2);
 
 -- --------------------------------------------------------
 

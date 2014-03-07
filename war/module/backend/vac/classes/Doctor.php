@@ -16,10 +16,38 @@ class Doctor
 		}
 		return $result;
 	}
+	
 	public function updateDocDetails($arr){
-		//$arr 	=  array("doc_name"=>"msikwal","doc_id"=>"1")
-		$update	=  $this->db->query("UPDATE doc_details SET doc_name = :doc_name WHERE doc_id = :doc_id",$arr); 
-		return $update;
+		
+		$arrDoc 	=  array(
+					"first_name"=>isset($arr['f_name']) ? $arr['f_name'] : "" ,
+					"last_name"=>isset($arr['l_name']) ? $arr['l_name'] : "" ,
+					"mobile"=>isset($arr['mobile_num']) ?$arr['mobile_num'] : "",
+					//"password"=>isset($arr['u_pass']) ? $arr['u_pass'] : "",
+					"email" => isset($arr['doc_email']) ? $arr['doc_email'] : "",
+					//"address" =>isset($arr['address']) ? $arr['address'] : "" ,
+					//"pincode" =>isset($arr['pincode']) ? $arr['pincode'] : "" ,
+					//"location" =>isset($arr['location']) ? $arr['location'] : "" ,
+					//"phone" =>"",
+					"text_msg" =>isset($arr['wel_msg']) ? $arr['wel_msg'] : "" 
+					//"per_patient_amt" =>isset($arr['per_patient_amt']) ? $arr['per_patient_amt'] : "50" ,
+					
+					
+		);
+		//echo"<pre>";
+		//print_r($arr);
+		//print_r($arrDoc);
+		//echo"</pre>";
+		//exit;
+		$update	 =  $this->db->query("UPDATE doc_details set first_name = :first_name,last_name = :last_name,email = :email,text_msg = :text_msg where mobile = :mobile ",$arrDoc); 
+		//echo"<pre>";
+		if($update===0){
+			return 1;
+		}else{
+			return 0;
+		}
+		//var_dump($update);
+		//echo"</pre>";
 	}
 	public function insertDocDetails($arr){
 		$authObj 	= new UserLoginDetails($this->db);
@@ -47,7 +75,7 @@ class Doctor
 		);
 		
 		$authObj->insertUserLogInDetails($arrLogin);	
-		$insert	 =  $this->db->query("INSERT INTO doc_details(doc_name,mobile,password,email,address,pincode,location,phone,text_msg,per_patient_amt,registration_date,group_id) VALUES(:doc_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:per_patient_amt,:registration_date,:group_id)",$arrDoc); 
+		$insert	 =  $this->db->query("INSERT INTO doc_details(first_name,mobile,password,email,address,pincode,location,phone,text_msg,per_patient_amt,registration_date,group_id) VALUES(:doc_name,:mobile,:password,:email,:address,:pincode,:location,:phone,:text_msg,:per_patient_amt,:registration_date,:group_id)",$arrDoc); 
 		return $insert;
 	}
 }

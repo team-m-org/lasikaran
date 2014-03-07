@@ -8,7 +8,9 @@ define(function(require){
 				this.registerEvents();
 			},
 			render : function (){
-				$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac));
+				console.log("======",getStorage('mobile'));
+				//$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac));
+				$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac)(getStorage('mobile')));
 			},
 			registerEvents : function (){
 				var self = this;
