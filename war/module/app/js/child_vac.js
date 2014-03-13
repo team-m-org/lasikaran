@@ -8,9 +8,8 @@ define(function(require){
 				this.registerEvents();
 			},
 			render : function (){
-				console.log("======",getStorage('mobile'));
-				//$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac));
-				$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac)(getStorage('mobile')));
+				var self = this;
+				$(".sub-dash-container").html(Handlebars.compile(tmpl_cvac)(self.panel.docDetails));
 			},
 			registerEvents : function (){
 				var self = this;
@@ -33,9 +32,11 @@ define(function(require){
 							    dataType: 'jsonp',
 							    success: function(json) {
 							       if(json.status==1){
-							    	  
+							    	  alert("Record Added successfully!");
+							       }else if(json.status==2){
+							    	   alert("Already Added!");
 							       }else{
-							    	   $(".error").html("Invalid Credentials !");
+							    	   alert("Error occoured!");
 							       }
 							    },
 							    error: function(jqXHR, textStatus, errorThrown) {

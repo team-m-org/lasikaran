@@ -8,8 +8,10 @@ define(function(require){
 	
 	var dashBoard = function() {};
 	dashBoard.prototype = {
+			docDetails : {},
 			init : function (){
 				var self = this;
+				self.docDetails = $.extend(self.docDetails,docObj.docInfo);
 				this.templateMap  =  {
 					'tmp_cv' :  {'fn' : self.renderChildVac,'title' : 'Child Vaccination','tmpid' : 'tmp_cv'},
 					'tmp_prg' : {'fn' : self.renderPrg,'title' : 'Pregnancy','tmpid' : 'tmp_prg'},

@@ -32,7 +32,7 @@ function saveUserInfo($inputArr){
 			$childObj = new ChildDetails($db);
 			$row_child   = $childObj->insertChildDetails($keyArr);
 			if($row_child>0){
-				$arr = array('status' => 1);
+				$arr = array('status' => $row_child);
 			}else{
 				$arr = array('status' => 0);
 			}

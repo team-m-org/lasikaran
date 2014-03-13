@@ -41,8 +41,14 @@ function getDocDetails($inputArr){
 			//print_r($keyArr);
 			$docObj 		= new Doctor($db);
 			$r_user 		= $docObj->getDocDetails($keyArr['mobile']);
-			//print_r($r_user);
+					
 			if(is_array($r_user) && sizeof($r_user)>0){
+				$today 	 = date("Y-m-d");
+				$time 	 = strtotime("-20 year",time());
+				$mindate = date("Y-m-d", $time);
+				$r_user[0]['min_date'] = $mindate;
+				$r_user[0]['max_date'] = $today;
+				
 				$arr = array(
 					'status' => "1",
 					'data' => $r_user,

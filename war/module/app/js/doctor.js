@@ -5,16 +5,15 @@ define(function(require){
 			docInfo : {},
 			init : function (){
 				this.render();
-				//this.registerEvents();
 			},
 			render : function (){
 				var self = this;
-				//self.getDocDetails();
-				$.when(self.getDocDetails()).then(self.renderDoc());
+				$.when(self.getDocDetails()).then(function(){self.renderDoc.apply(self)});
 			},
 			renderDoc : function (){
 				var self = this; 
 				$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
+				$(".js-user-name a").text("Welcome "+self.docInfo.first_name+" "+self.docInfo.last_name);
 		    	self.registerEvents();
 			},
 			registerEvents : function (){
@@ -27,28 +26,28 @@ define(function(require){
 			getDocDetails : function(){
 				var self =this;
 				var url = "http://localhost/vac/json/doctor.php" 
-					$.ajax({
-						   	type: 'GET',
-						   	crossDomain: true,
-						    url: url,
-						    data : getStorage('mobile'),
-						    async: true,
-						    jsonpCallback: 'jsonCallback',
-						    contentType: "application/json",
-						    dataType: 'jsonp',
-						    success: function(json) {
-						       if(json.status==1){
-						    	  self.docInfo = json.data[0];
-						    	  //$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
-						    	  //self.registerEvents();
-						       }else{
-						    	   $(".error").html("Invalid Credentials !");
-						       }
-						    },
-						    error: function(jqXHR, textStatus, errorThrown) {
-						    	  console.log(textStatus, errorThrown);
-						   	}
-					})
+				return $.ajax({
+					   	type: 'GET',
+					   	crossDomain: true,
+					    url: url,
+					    data : getStorage('mobile'),
+					    async: true,
+					    jsonpCallback: 'jsonCallback',
+					    contentType: "application/json",
+					    dataType: 'jsonp',
+					    success: function(json) {
+					       if(json.status=="1"){
+					    	  self.docInfo = json.data[0];
+					    	  //$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
+					    	  //self.registerEvents();
+					       }else{
+					    	   $(".error").html("Invalid Credentials !");
+					       }
+					    },
+					    error: function(jqXHR, textStatus, errorThrown) {
+					    	  console.log(textStatus, errorThrown);
+					   	}
+				});
 			},
 			validateHandler  :function(e,self){
 				var inputArr = $("#doc_frm").serializeArray();

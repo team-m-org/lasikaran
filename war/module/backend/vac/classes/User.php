@@ -17,9 +17,36 @@ class User
 		return $result;
 	}
 	public function updateUserDetails($arr){
-		//$arr 	=  array("user_name"=>"msikwal","user_id"=>"1")
-		$update	=  $this->db->query("UPDATE user_details SET user_name = :user_name WHERE user_id = :user_id",$arr); 
-		return $update;
+		
+		$arrUser 	=  array(
+					"first_name"=>isset($arr['f_name']) ? $arr['f_name'] : "" ,
+					"last_name"=>isset($arr['l_name']) ? $arr['l_name'] : "" ,
+					"uid"=>isset($arr['user_id']) ? $arr['user_id'] : "" ,
+					//"password"=>isset($arr['u_pass']) ? $arr['u_pass'] : "",
+					"email" => isset($arr['user_email']) ? $arr['user_email'] : "",
+					"address" =>isset($arr['user_address']) ? $arr['user_address'] : "" ,
+					//"pincode" =>isset($arr['pincode']) ? $arr['pincode'] : "" ,
+					//"location" =>isset($arr['location']) ? $arr['location'] : "" ,
+					//"phone" =>"",
+					//"text_msg" =>isset($arr['wel_msg']) ? $arr['wel_msg'] : "" 
+					//"per_patient_amt" =>isset($arr['per_patient_amt']) ? $arr['per_patient_amt'] : "50" ,
+					
+					
+		);
+		//echo"<pre>";
+		//print_r($arr);
+		//print_r($arrUser);
+		//echo"</pre>";
+		//exit;
+		$update	 =  $this->db->query("UPDATE user_details set first_name = :first_name,last_name = :last_name,email = :email, address = :address  where user_id = :uid ",$arrUser); 
+		//echo"<pre>";
+		if($update===0){
+			return 1;
+		}else{
+			return 0;
+		}
+		//var_dump($update);
+		//echo"</pre>";
 	}
 	public function insertUserDetails($input_arr){
 		$authObj 	= new UserLoginDetails($this->db);

@@ -20,7 +20,7 @@ define(function(require){
 				var self = this;
 				var classtoShow;
 				if(self.userInfo.gId==1){
-					dashBoard.init();
+					doctor.init();
 					classtoShow = "doctor_"+self.userInfo.gId;
 				}else{
 					user.init();	
@@ -40,7 +40,7 @@ define(function(require){
 					doctor.init();
 				}else if(renderComp==="user"){
 					user.init();
-				}else{
+				}else if(renderComp==="dashboard"){
 					dashBoard.init();
 				}
 				$(this).addClass('active');
