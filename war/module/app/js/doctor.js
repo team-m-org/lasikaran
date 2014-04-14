@@ -1,4 +1,5 @@
 define(function(require){
+	var	utilObj	= require("./utility");
 	var tmpl_h = require("text!../html/doctor.html");
 	var doctorDetails = function() {};
 	doctorDetails.prototype = {
@@ -19,39 +20,22 @@ define(function(require){
 			registerEvents : function (){
 				var self = this;
 				$(".js_doc_details .btn-primary").on("click", function(e) {
-					alert("called");
 					return self.validateHandler.call(this,e,self);
 				});
 			},
 			getDocDetails : function(){
 				var self =this;
-				var url = "http://localhost/vac/json/doctor.php" 
-				return $.ajax({
-					   	type: 'GET',
-					   	crossDomain: true,
-					    url: url,
-					    data : getStorage('mobile'),
-					    async: true,
-					    jsonpCallback: 'jsonCallback',
-					    contentType: "application/json",
-					    dataType: 'jsonp',
-					    success: function(json) {
-					       if(json.status=="1"){
+				var url = "http://localhost/vac/json/doctor.php";
+				return utilObj.exchangeDataFromServer('GET',url,getStorage('mobile'),function(json) {
+				       if(json.status=="1"){
 					    	  self.docInfo = json.data[0];
-					    	  //$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
-					    	  //self.registerEvents();
-					       }else{
-					    	   $(".error").html("Invalid Credentials !");
-					       }
-					    },
-					    error: function(jqXHR, textStatus, errorThrown) {
-					    	  console.log(textStatus, errorThrown);
-					   	}
-				});
+				       }
+				  }
+				);
 			},
 			validateHandler  :function(e,self){
 				var inputArr = $("#doc_frm").serializeArray();
-				if(self.validateInputs(inputArr)){
+				if(utilObj.validateInputs(inputArr)){
 						var doc_id = $("#doc_id").val();
 						var mode;
 						if(doc_id===""){
@@ -60,39 +44,15 @@ define(function(require){
 							mode = "update";
 						}
 						var url = "http://localhost/vac/json/doctor.php?mode="+mode; 
-						$.ajax({
-							   	type: 'GET',
-							   	crossDomain: true,
-							    url: url,
-							    data : inputArr,
-							    async: false,
-							    jsonpCallback: 'jsonCallback',
-							    contentType: "application/json",
-							    dataType: 'jsonp',
-							    success: function(json) {
-							       if(json.status==1){
-							    	  
-							       }else{
-							    	   $(".error").html("Invalid Credentials !");
-							       }
-							    },
-							    error: function(jqXHR, textStatus, errorThrown) {
-							    	  console.log(textStatus, errorThrown);
-							   	}
-						})
+						utilObj.exchangeDataFromServer('GET',url,inputArr,function(json) {
+						       if(json.status==1){
+						    	   showPopup("Record Updated Successfully!!");
+						       }else{
+						    	   showPopup("Error Occoured!!");
+						       }
+						    }
+						)
 				}
-			},
-			validateInputs : function(inputArr){
-				for(var i=0;i<inputArr.length;i++){
-					if(!$("#"+inputArr[i].name)[0].checkValidity()){
-						$("#"+inputArr[i].name).parent().removeClass('has-error').addClass('has-error');
-						$("#"+inputArr[i].name).focus();
-						return false;
-					}else{
-						$("#"+inputArr[i].name).parent().removeClass('has-error');
-					}
-				}
-				return true;
 			}
 	};
 	return new doctorDetails();

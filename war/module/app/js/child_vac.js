@@ -32,11 +32,11 @@ define(function(require){
 							    dataType: 'jsonp',
 							    success: function(json) {
 							       if(json.status==1){
-							    	  alert("Record Added successfully!");
+							    	   showPopup("Record Added successfully!");
 							       }else if(json.status==2){
-							    	   alert("Already Added!");
+							    	   showPopup("Already Added!");
 							       }else{
-							    	   alert("Error occoured!");
+							    	   showPopup("Error occoured!");
 							       }
 							    },
 							    error: function(jqXHR, textStatus, errorThrown) {

@@ -37,11 +37,11 @@ define(function(require){
 						    dataType: 'jsonp',
 						    success: function(json) {
 						       if(json.status==1){
-						    	   alert("Updated successfully!");
-						       }else if(json.status==2){
-						    	   alert("Already Added!");
+						    	   showPopup("Updated successfully!");
+						       }else if(json.status==0){
+						    	   showPopup("Already Updated!");
 						       }else{
-						    	   $(".error").html("Invalid Credentials !");
+						    	   showPopup("Invalid Credentials !");
 						       }
 						    },
 						    error: function(jqXHR, textStatus, errorThrown) {
@@ -65,10 +65,8 @@ define(function(require){
 					    success: function(json) {
 					       if(json.status=="1"){
 					    	  self.userInfo = json.data[0];
-					    	  //$(".util-container").html(Handlebars.compile(tmpl_h)(self.docInfo));
-					    	  //self.registerEvents();
 					       }else{
-					    	   $(".error").html("Invalid Credentials !");
+					    	   showPopup("Error Occoured!");
 					       }
 					    },
 					    error: function(jqXHR, textStatus, errorThrown) {

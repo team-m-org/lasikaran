@@ -2,6 +2,7 @@ define(function(require){
 	var $ 			= require('jquery');
 	var Handlebars	= require('handlebars');
 	var bmin 		= require('bmin');
+	var bModal 		= require('bmodal');
 	var	logObj	= require("./login");
 	var tmpl_h 	= require("text!../html/user_launch.html");
 	var ulObj = function() {};

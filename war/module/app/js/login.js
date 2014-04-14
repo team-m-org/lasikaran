@@ -1,6 +1,6 @@
-
 define(function(require){
 	var	menuObj	= require("./menu");
+	var	utilObj	= require("./utility");
 	var tmpl_h 	= require("text!../html/login.html");
 	var tmpl_r 	= require("text!../html/register.html");
 	var logObj = function() {};
@@ -35,56 +35,20 @@ define(function(require){
 					inputArr = $("#reg_frm").serializeArray();
 					url = "http://localhost/vac/json/authUser.php?mode=reg"+Math.random();
 				}	
-				if(self.validateInputs(inputArr)){
-					$.ajax({
-						   	type: 'GET',
-						   	crossDomain: true,
-						    url: url,
-						    data : inputArr,
-						    async: false,
-						    jsonpCallback: 'jsonCallback',
-						    contentType: "application/json",
-						    dataType: 'jsonp',
-						    success: function(json) {
-						       if(json.status!==0){
-						    	   self.userInfo.mobile = $("#mobile_num").val();
-						    	   self.userInfo.gId 	= json.status;
-						    	   //console.log("============",self.userInfo);
-						    	   setStorage('mobile',self.userInfo);
-						    	   menuObj.init();
-						       }else{
-						    	   $(".error").html("Invalid Credentials !");
-						       }
-						    },
-						    error: function(jqXHR, textStatus, errorThrown) {
-						    	  console.log(textStatus, errorThrown);
-						   	}
-					})
+				if(utilObj.validateInputs(inputArr)){
+					utilObj.exchangeDataFromServer('GET',url,inputArr,function(json) {
+					       if(json.status!==0){
+					    	   self.userInfo.mobile = $("#mobile_num").val();
+					    	   self.userInfo.gId 	= json.status;
+					    	   setStorage('mobile',self.userInfo);
+					    	   menuObj.init();
+					       }else{
+					    	   showPopup("Invalid Credentials !");
+					       }
+					    }
+				   );
 				}
-				//self.panel.exchangeDataFromServer('get',url,param,true,function (){});
-			},
-			validateInputs : function(inputArr){
-				for(var i=0;i<inputArr.length;i++){
-					if(!$("#"+inputArr[i].name)[0].checkValidity()){
-						$("#"+inputArr[i].name).parent().removeClass('has-error').addClass('has-error');
-						$("#"+inputArr[i].name).focus();
-						return false;
-					}else{
-						$("#"+inputArr[i].name).parent().removeClass('has-error');
-					}
-				}
-				return true;
 			}
 	};
 	return new logObj();
 });
-function setStorage(key,obj){
-	localStorage.setItem(key,JSON.stringify(obj));
-};
-function getStorage(key){
-	if(localStorage.getItem(key)!= "undefined"){
-		return JSON.parse(localStorage.getItem(key));
-	}else{
-		return [];
-	}
-};

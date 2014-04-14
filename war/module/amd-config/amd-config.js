@@ -9,7 +9,8 @@ var require = {
 			normalize : 'libraries/require/normalize',
 			async : 'libraries/require/async',
 			text : 'libraries/require/text',
-			bmin : 'libraries/bootstrapv3.0.3/js/bootstrap.min'
+			bmin : 'libraries/bootstrapv3.0.3/js/bootstrap.min',
+			bmodal : 'libraries/bootstrapv3.0.3/js/bootstrap-modal'
 			/*bTrans : 'libraries/bootstrap/assets/js/bootstrap-transition',
 			bDropdown : 'libraries/bootstrap/assets/js/bootstrap-dropdown',
 			bCollapse : 'libraries/bootstrap/assets/js/bootstrap-collapse'*/
